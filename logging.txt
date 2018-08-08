@@ -1,0 +1,14 @@
+2018-08-08 12:01:27,274;DEBUG;Run cisco_201 to 192.168.1.201 using file commands\cisco_1.txt
+2018-08-08 12:01:56,015;DEBUG;Run D3552 to 10.20.10.14 using file commands\hw3500.txt
+2018-08-08 12:01:56,047;DEBUG;starting thread (client mode): 0x687da668
+2018-08-08 12:01:56,047;DEBUG;Local version/idstring: SSH-2.0-paramiko_2.4.1
+2018-08-08 12:01:56,050;DEBUG;Remote version/idstring: SSH-1.5-HUAWEI-VRP-3.10
+2018-08-08 12:01:56,050;ERROR;Exception: Incompatible version (1.5 instead of 2.0)
+2018-08-08 12:01:56,053;ERROR;Traceback (most recent call last):
+2018-08-08 12:01:56,053;ERROR;  File "D:\Miniconda3\lib\site-packages\paramiko\transport.py", line 1893, in run
+2018-08-08 12:01:56,053;ERROR;    self._check_banner()
+2018-08-08 12:01:56,057;ERROR;  File "D:\Miniconda3\lib\site-packages\paramiko\transport.py", line 2073, in _check_banner
+2018-08-08 12:01:56,057;ERROR;    raise SSHException(msg.format(version))
+2018-08-08 12:01:56,057;ERROR;paramiko.ssh_exception.SSHException: Incompatible version (1.5 instead of 2.0)
+2018-08-08 12:01:56,057;ERROR;
+2018-08-08 12:01:56,057;ERROR;Error:Incompatible version (1.5 instead of 2.0)

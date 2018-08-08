@@ -1,0 +1,174 @@
+enable\ncisco
+configure terminal
+
+interface GigabitEthernet0/1
+no shut
+description -- test-2_ag--
+nameif test-2
+security-level 50
+ip address 11.11.11.1 255.255.255.248
+
+access-list test-2 line 1-in extended deny ip any any 
+
+mtu test-2 1500
+ip verify reverse-path interface test-2
+icmp permit any test-2
+
+access-group test-2-in in interface test-2
+
+interface GigabitEthernet0/2
+no shut
+description -- test-3_ag--
+nameif test-3
+security-level 50
+ip address 12.12.12.1 255.255.255.248
+
+access-list test-3 line 1-in extended deny ip any any 
+
+mtu test-3 1500
+ip verify reverse-path interface test-3
+icmp permit any test-3
+
+access-group test-3-in in interface test-3
+
+wr mem
+
+access-list test-1 line 1 extended permit tcp host 10.10.115.136 host 10.9.36.15 eq smtp 
+access-list test-1 line 1 extended permit tcp host 10.10.115.135 host 10.9.36.15 eq smtp 
+access-list test-1 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.138.132 eq 8080 
+access-list test-1 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.242.4 eq 9000 
+access-list test-1 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.122.148 eq 9000 
+access-list test-1 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.242.4 eq 8080 
+access-list test-1 line 1 extended permit udp 10.10.115.152 255.255.255.248 host 192.168.3.63 eq syslog 
+access-list test-1 line 1 extended permit udp 10.10.115.152 255.255.255.248 host 192.168.3.25 eq syslog 
+access-list test-1 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.122.148 eq 8080 
+access-list test-1 line 1 extended permit tcp host 10.10.115.156 host 10.9.36.16 eq smtp 
+access-list test-1 line 1 extended permit tcp host 10.10.115.156 host 10.9.36.15 eq smtp 
+access-list test-1 line 1 extended permit tcp host 10.10.115.155 host 10.9.36.16 eq smtp 
+access-list test-1 line 1 extended permit tcp host 10.10.115.155 host 10.9.36.15 eq smtp
+access-list test-1 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.65.14 eq 1489 
+access-list test-1 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.124.68 object-group 80-443 
+access-list test-1 line 1 extended permit icmp host 10.10.115.151 host 1.1..225.195 
+access-list test-1 line 1 extended permit ip 10.10.115.128 255.255.255.128 1.1..225.0 255.255.255.0 
+access-list test-1 line 1 extended permit icmp host 10.10.115.135 host 1.1..225.195 
+access-list test-1 line 1 extended permit ip host 10.10.115.151 10.10.113.0 255.255.255.128 
+
+
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.120.40.17 eq 8443 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.120.40.17 eq https 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.120.40.17 eq 8080 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.120.40.17 eq 8000 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.120.40.17 eq www 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.120.82.192 255.255.255.224 eq 8443 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.120.82.192 255.255.255.224 eq https 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.120.82.192 255.255.255.224 eq 8080 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.120.82.192 255.255.255.224 eq 8000 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.120.82.192 255.255.255.224 eq www 
+access-list test-2 line 1 extended permit ip host 10.10.115.136 host 10.10.114.139 
+access-list test-2 line 1 extended permit ip host 10.10.115.135 host 10.10.114.139 
+access-list test-2 line 1 extended permit ip host 10.10.115.151 host 10.10.114.139
+object-group service PACK-DB-ERPservice tcp
+ port-object eq sqlnet
+ port-object eq 1523
+ port-object eq www
+ port-object eq 8080
+ port-object eq 8001
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.10.68.0 255.255.255.0 object-group PACK-DB-ERPservice 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.224 10.10.119.112 255.255.255.240 eq 12690 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.224 10.10.119.112 255.255.255.240 eq 8443 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.224 10.10.119.112 255.255.255.240 range 8080 8082 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.224 10.10.119.112 255.255.255.240 range 13080 13091 
+access-list test-2 line 1 extended permit tcp 10.10.115.128 255.255.255.224 10.10.119.112 255.255.255.240 eq sqlnet 
+object-group network PACK_HPSM_Servers
+ network-object host 10.120.84.4
+ network-object host 10.120.84.5
+ network-object host 10.120.84.7
+ network-object host 10.120.84.8
+ network-object host 10.120.84.6
+object-group service PACKtestbed_Ports tcp
+ port-object eq 8080
+ port-object eq 8005
+ port-object eq 8009 
+
+ 
+access-list test-3 line 1 extended permit tcp host 10.10.115.140 object-group PACK_HPSM_Servers object-group PACKtestbed_Ports 
+access-list test-3 line 1 extended permit tcp host 10.10.115.139 object-group PACK_HPSM_Servers object-group PACKtestbed_Ports 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.224 host 10.10.64.47 eq sqlnet 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.224 host 10.10.64.34 range 2320 2321 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.224 host 10.10.64.31 range 2320 2321 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.224 host 10.10.64.34 range www 81 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.224 host 10.10.64.31 range www 81 
+access-list test-3 line 1 extended permit tcp host 10.10.115.146 host 10.9.42.120 eq 8080 
+access-list test-3 line 1 extended permit tcp host 10.10.115.140 host 10.9.27.252 eq smtp 
+access-list test-3 line 1 extended permit tcp host 10.10.115.139 host 10.9.27.252 eq smtp 
+access-list test-3 line 1 extended permit tcp host 10.10.115.140 10.9.36.0 255.255.255.224 eq smtp 
+access-list test-3 line 1 extended permit tcp host 10.10.115.139 10.9.36.0 255.255.255.224 eq smtp 
+access-list test-3 line 1 extended permit tcp host 10.10.115.136 host 10.9.27.252 eq smtp 
+access-list test-3 line 1 extended permit tcp host 10.10.115.135 host 10.9.27.252 eq smtp 
+access-list test-3 line 1 extended permit tcp host 10.10.115.136 10.9.36.8 255.255.255.248 eq smtp 
+access-list test-3 line 1 extended permit tcp host 10.10.115.135 10.9.36.8 255.255.255.248 eq smtp
+
+
+object-group network PACK-ERP
+ network-object host 10.10.68.44
+ network-object host 10.10.68.46
+ network-object host 10.120.82.213
+ network-object host 10.120.82.218
+ network-object host 10.120.82.219 
+ 
+access-list test-3 line 1 extended permit tcp host 10.10.115.136 object-group PACK-ERP range sqlnet 1525 
+access-list test-3 line 1 extended permit tcp host 10.10.115.135 object-group PACK-ERP range sqlnet 1525 
+
+object-group network PACK_APP_Servers
+ network-object host 10.10.115.135
+ network-object host 10.10.115.136
+ network-object host 10.10.115.139
+ network-object host 10.10.115.140
+ 
+object-group network PV-Svr_Kazhnah_MS
+ network-object host 172.23.20.10
+ network-object host 172.23.20.15
+ network-object host 10.120.67.10
+ network-object host 10.120.67.11
+ network-object host 10.120.195.10
+ network-object host 10.120.195.11
+ network-object host 10.120.67.12
+ network-object host 10.120.67.13
+object-group service AD-UDP udp
+ port-object eq ntp
+ port-object eq 445
+ port-object eq 389
+ port-object eq 88
+ port-object eq domain
+ port-object range 135 netbios-dgm
+access-list test-3 line 1 extended permit udp object-group PACK_APP_Servers object-group PV-Svr_Kazhnah_MS object-group AD-UDP 
+access-list test-3 line 1 extended permit tcp object-group PACK_APP_Servers object-group PV-Svr_Kazhnah_MS object-group AD-TCP 
+access-list test-3 line 1 extended permit tcp object-group PACK-2-Ducorp-Apps-Grp-2 host 10.9.42.120 eq 8080
+access-list test-3 line 1 extended permit tcp host 10.10.115.136 host 10.10.68.50 eq 1523 
+access-list test-3 line 1 extended permit tcp host 10.10.115.135 host 10.10.68.50 eq 1523 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.10.115.0 255.255.255.128 eq 7234 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.10.115.0 255.255.255.128 eq www 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.10.115.0 255.255.255.128 eq https 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.128 10.10.115.0 255.255.255.128 range 7134 7136 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.224 host 10.10.120.132 range sqlnet 1525 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.224 10.10.64.32 255.255.255.224 range sqlnet 1525
+access-list test-3 line 1 extended permit udp 10.10.115.128 255.255.255.128 10.10.114.128 255.255.255.128 eq syslog 
+access-list test-3 line 1 extended permit ip 10.10.115.128 255.255.255.128 host 10.10.64.36 
+access-list test-3 line 1 extended permit ip 10.10.115.128 255.255.255.128 host 10.10.64.21 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.68.31 eq 1541 
+access-list test-3 line 1 extended permit tcp 10.10.115.128 255.255.255.128 host 10.10.64.21 range 2320 2321 
+access-list test-3 line 1 extended deny ip any any 
+access-list test-3 line 1 extended permit tcp host 10.10.115.135 host 10.10.68.46 eq 1525 
+access-list test-3 line 1 extended permit tcp host 10.10.115.137 host 10.10.68.46 eq 1525 
+access-list test-2 line 1 extended permit tcp 10.10.116.192 255.255.255.224 host 10.10.242.4 eq 8080 
+access-list test-2 line 1 extended permit tcp 10.10.116.192 255.255.255.224 host 10.10.122.148 eq 8080 
+access-list test-2 line 1 extended permit tcp 10.10.116.128 255.255.255.224 host 10.10.65.14 eq 1489 
+access-list test-2 line 1 extended permit ip 10.10.116.192 255.255.255.224 host 10.10.64.36 
+access-list test-2 line 1 extended permit ip 10.10.116.192 255.255.255.224 host 10.10.64.21 
+access-list test-2 line 1 extended permit tcp 10.10.116.192 255.255.255.224 host 10.10.68.31 eq 1541 
+access-list test-2 line 1 extended permit tcp 10.10.116.192 255.255.255.224 host 10.10.64.21 range 2320 2321 
+access-list test-2 line 1 extended deny ip any any 
+access-list test-2 line 1 extended permit tcp 10.10.116.192 255.255.255.224 host 10.10.122.148 eq 9000 
+access-list test-2 line 1 extended permit tcp 10.10.116.192 255.255.255.224 host 10.10.242.4 eq 9000 
+
+write mem

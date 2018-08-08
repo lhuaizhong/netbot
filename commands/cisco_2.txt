@@ -1,0 +1,9 @@
+enable\ncisco
+show hostname
+show version
+show run name
+show run object network
+show route
+show run ip address
+show run access-group
+show run

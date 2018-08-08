@@ -1,0 +1,4 @@
+enable\ncisco
+config terminal
+hostname cisco-test
+show hostname

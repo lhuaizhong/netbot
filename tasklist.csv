@@ -1,0 +1,2 @@
+name,type,ip,username,password,command_file,save_output
+cisco_201,cisco_ios,192.168.1.201,cisco,cisco,cisco_1,yes

@@ -1,5 +1,5 @@
 # netbot
-Swith, Router, Firewall operating bot.
+Swith, Router, Firewall operation bot.
 
 # currently supported platforms are: 
 a10

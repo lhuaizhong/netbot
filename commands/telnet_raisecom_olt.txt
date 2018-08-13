@@ -1,0 +1,8 @@
+telnet {ip}
+{username}
+{password}
+en
+{enpassword}
+show running-config nomore@@#
+exit
+exit

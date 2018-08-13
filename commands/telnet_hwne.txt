@@ -1,0 +1,5 @@
+telnet {ip}
+{password}
+screen-length 0 temporary
+dis cur@@return
+quit

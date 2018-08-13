@@ -1,2 +1,14 @@
-name,type,ip,username,password,command_file,save_output
-cisco_201,cisco_ios,192.168.1.201,cisco,cisco,cisco_1,yes
+name,type,ip,username,password,command_file,save_output,output_path,parameters
+NE40EX8-0,linux,172.16.88.88,user,pass,telnet_hwne,yes,output/bone,"{""ip"":""172.16.0.1"",""username"":""admin"",""password"":""123456""}"
+,,,,,,,,
+S9712-0,linux,172.16.88.88,user,pass,telnet_hw93,yes,output/bone,"{""ip"":""172.16.0.10"",""username"":""admin"",""password"":""123456""}"
+,,,,,,,,
+S9306-0,linux,172.16.88.88,user,pass,telnet_hw93,yes,output/bone,"{""ip"":""172.16.0.12"",""username"":""admin"",""password"":""123456""}"
+,,,,,,,,
+S7706,linux,172.16.88.88,user,pass,telnet_hw93,yes,output/a,"{""ip"":""172.16.0.22"",""username"":""admin"",""password"":""123456""}"
+,,,,,,,,
+CASA-1,linux,172.16.88.88,user,pass,telnet_casa22,yes,output/b,"{""ip"":""172.16.0.180"",""username"":""admin"",""password"":""123456"",""enpassword"":""654321""}"
+,,,,,,,,
+B-OLT,linux,172.16.88.88,user,pass,telnet_suma_olt,yes,output/b,"{""ip"":""172.16.2.16"",""username"":""admin"",""password"":""123456""}"
+,,,,,,,,
+B-OLT-2,linux,172.16.88.88,user,pass,telnet_raisecom_olt,yes,output/b,"{""ip"":""172.16.2.17"",""username"":""admin"",""password"":""123456"",""enpassword"":""654321""}"

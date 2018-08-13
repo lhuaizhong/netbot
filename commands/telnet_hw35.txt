@@ -1,0 +1,5 @@
+telnet {ip}
+{username}
+{password}
+##---- More ----
+dis cur

@@ -1,0 +1,6 @@
+telnet {ip}
+{username}
+{password}
+page-off
+show runn@@end of configuration
+exit

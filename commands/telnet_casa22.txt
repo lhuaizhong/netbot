@@ -1,0 +1,8 @@
+telnet {ip}
+{username}
+{password}
+en
+{enpassword}
+page-off
+show runn@@#
+logout

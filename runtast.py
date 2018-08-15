@@ -121,11 +121,27 @@ def main():
                     print('output>>' + output[:60]+'...')
                 else:
                     print('output>>' + output)
-                if not more:
+                if not more or not more in output:
                     outputs += [output]
                 else:
-                    outputs += [output.replace(more, '')]
+                    outputs += [output.replace(more, '').rstrip()]
                     #outputs += [output]
+                    hasMore = True
+                    while hasMore:
+                        hasMore = False
+                        output = net_connect.send_command_timing(' ', max_loops=60, strip_prompt=False, strip_command=False, normalize=False)
+                        output = output.split('[42D')[-1]
+                        if len(output)>60:
+                            print('output>>' + output[:60]+'...')
+                        else:
+                            print('output>>' + output)
+                        if not more in output:
+                            outputs += [output]
+                        else:
+                            outputs += [output.replace(more, '').rstrip()]
+                            #outputs += [output]
+                            hasMore = True
+
             net_connect.disconnect()
 
             # Storing output

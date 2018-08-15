@@ -101,24 +101,24 @@ def main():
             for cmd in commands: ###
                 cmd = cmd.format(**para)
                 cmd = cmd.strip().replace('\\n','\n')
-                expect_string=''
-                if '@@' in cmd:
-                    ss = cmd.split('@@')
-                    cmd = ss[0]
-                    expect_string = ss[1].strip()
                 if cmd[:2]=='##':
                     more = cmd[2:].strip()
                     print('Paging string: '+more)
                     continue
+                expect_string = more
+                if '@@' in cmd:
+                    ss = cmd.split('@@')
+                    cmd = ss[0]
+                    expect_string = ss[1].strip()
                 if not expect_string:
                     print('command>>' + cmd)
                 else:
                     print('command>> %s  =>%s' % (cmd, expect_string))
                 #output = net_connect.send_command(cmd)
                 #output = net_connect.send_command(cmd, max_loops=10000, auto_find_prompt=False, strip_prompt=False, strip_command=False, expect_string=expect_string)
-                output = net_connect.send_command(cmd, max_loops=100, auto_find_prompt=False, strip_prompt=False, strip_command=False, expect_string=expect_string)
-                if len(output)>60:
-                    print('output>>' + output[:60]+'...')
+                output = net_connect.send_command(cmd, max_loops=150, auto_find_prompt=False, strip_prompt=False, strip_command=False, expect_string=expect_string)
+                if len(output)>130:
+                    print('output>>' + output[:60]+'\n...\n'+output[-60:])
                 else:
                     print('output>>' + output)
                 if not more or not more in output:
@@ -130,9 +130,9 @@ def main():
                     while hasMore:
                         hasMore = False
                         output = net_connect.send_command_timing(' ', max_loops=60, strip_prompt=False, strip_command=False, normalize=False)
-                        output = output.split('[42D')[-1]
-                        if len(output)>60:
-                            print('output>>' + output[:60]+'...')
+                        output = output.split('[42D')[-1].split('[16D')[-1]
+                        if len(output)>130:
+                            print('output>>' + output[:60]+'\n...\n'+output[-60:])
                         else:
                             print('output>>' + output)
                         if not more in output:

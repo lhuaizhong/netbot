@@ -41,7 +41,7 @@ def comparefile(out_file, out_file_pre, out_file_diff):
     fa.close()
 
 def main():
-    start_time = time.clock()
+    start_time = time.perf_counter()
     #print(netmiko.ssh_dispatcher.CLASS_MAPPER)
     #print(ssh_dispatcher.platforms)
 
@@ -161,7 +161,7 @@ def main():
             print('Error:%s' % e)
             traceback.print_exc()
 
-    print('Completed in', time.clock() - start_time, 'seconds')
+    print('Completed in', time.perf_counter() - start_time, 'seconds')
 
 if __name__ == '__main__':
     main()
